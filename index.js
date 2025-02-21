@@ -1,7 +1,11 @@
 import { config } from 'dotenv';
 config();
 
-import { iniciarServidor } from './configs/server.js';
-iniciarServidor();
+import { iniciarServidor, crearAdmin } from './configs/server.js'; 
 
+const startApp = async () => {
+    await iniciarServidor();
+    await crearAdmin(); 
+};
 
+startApp();
