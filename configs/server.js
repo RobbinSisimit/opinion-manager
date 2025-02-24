@@ -9,9 +9,13 @@ import limiter from '../src/middlewares/validar-cant-peticiones.js'
 import authRoutes from '../src/auth/auth.routes.js'
 import userRoutes from "../src/users/user.routes.js"
 import postRoutes from "../src/posts/post.routes.js"
+import commentRoutes from "../src/comment/comment.routes.js"
+import categoryRoutes from "../src/categories/category.routes.js"
 
 import bcrypt from "bcrypt";
-import User from "../src/users/user.model.js";
+import Usuario from "../src/users/user.model.js";
+import Category from "../src/categories/category.model.js";
+import { hash } from "argon2";
 
 
 const configurarMiddlewares = (app) => {
@@ -24,45 +28,62 @@ const configurarMiddlewares = (app) => {
 }
 
 const configurarRutas = (app) =>{
-        app.use("/Opiniones/v1/auth", authRoutes);
-        app.use("/Opiniones/v1/users", userRoutes);
-        app.use("/Opiniones/v1/posts", postRoutes);
+    app.use("/Opiniones/v1/auth", authRoutes);
+    app.use("/Opiniones/v1/users", userRoutes);
+    app.use("/Opiniones/v1/posts", postRoutes);
+    app.use("/Opiniones/v1/comments", commentRoutes);
+    app.use("/Opiniones/v1/categorias", categoryRoutes);
 }
 
 const conectarDB = async () => {
     try {
         await dbConnection();
         console.log("Conexion Exitosa Con La Base De Datos");
+        await inicializarCategoria();
     } catch (error) {
         console.log("Error Al Conectar Con La Base De Datos", error);
     }
 }
 
-
-export const crearAdmin = async () => {
+const inicializarCategoria = async () => {
     try {
-        const existeAdmin = await User.findOne({ username: "admin" });
+        const defaultCategory = await Category.findOne({ name: "General" });
+        if (!defaultCategory) {
+            await Category.create({ name: "General" });
+            console.log("Categoría por defecto creada: General");
+        } else {
+            console.log("Categoría por defecto ya existente");
+        }
+    } catch (error) {
+        console.error("Error al inicializar categorías:", error);
+    }
+};
 
-        if (!existeAdmin) {
-            const salt = await bcrypt.genSalt(10);
-            const hashedPassword = await bcrypt.hash("12345678", salt);
 
-            const admin = new User({
+const crearAdmin = async () => {
+    try {
+        const adminExistente = await Usuario.findOne({ role: "ADMIN_ROLE" });
+
+        if (!adminExistente) {
+            const passwordEncriptada = await hash("Admin123");
+
+            const admin = new Usuario({
                 name: "Admin",
                 surname: "Principal",
                 username: "admin",
-                password: hashedPassword,
                 email: "admin@gmail.com",
-                role: "ADMIN_ROLE",
+                phone: "123456789",
+                password: passwordEncriptada,
+                role: "ADMIN_ROLE"
             });
 
             await admin.save();
-            console.log(" Usuario ADMIN_ROLE creado con éxito.");
+            console.log("Administrador creado exitosamente.");
         } else {
-            console.log(" El usuario ADMIN_ROLE ya existe.");
+            console.log("El administrador ya existe.");
         }
     } catch (error) {
-        console.error(" Error al crear el usuario ADMIN_ROLE:", error);
+        console.error("Error al crear el administrador:", error);
     }
 };
 
@@ -71,6 +92,7 @@ export const iniciarServidor = async () => {
     const port = process.env.PORT || 3009;
 
     await conectarDB();
+    await crearAdmin();
     configurarMiddlewares(app);
     configurarRutas(app);
 

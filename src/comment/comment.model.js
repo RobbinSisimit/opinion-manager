@@ -1,22 +1,17 @@
 import mongoose from "mongoose";
 
-const PostSchema = new mongoose.Schema({
-    title: {
-        type: String,
-        required: [true, "El Titulo Es Obligatorio"]
-    },
-    category: {  
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Category',  
-        required: true 
-    },
+const CommentSchema = new mongoose.Schema({
     content: {
         type: String,
         required: [true, "El Contenido Es Obligatorio"]
     },
-    keeper: { 
+    keeperUser: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'User', 
+        required: true },
+    keeperPost: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Post', 
         required: true },
     status: {
         type: Boolean,
@@ -27,4 +22,4 @@ const PostSchema = new mongoose.Schema({
     versionKey: false   
 });
 
-export default mongoose.model("Post", PostSchema);
+export default mongoose.model("Comment", CommentSchema);
