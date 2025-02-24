@@ -1,0 +1,26 @@
+[{
+  "_id": {
+    "$oid": "67bc0d2cfa11e3d20a84110d"
+  },
+  "name": "General",
+  "status": true,
+  "createdAt": {
+    "$date": "2025-02-24T06:09:48.766Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-24T06:09:48.766Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67bc13d81c4f3f49be0a16e9"
+  },
+  "name": "Kinal",
+  "status": true,
+  "createdAt": {
+    "$date": "2025-02-24T06:38:16.846Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-24T06:38:16.846Z"
+  }
+}]

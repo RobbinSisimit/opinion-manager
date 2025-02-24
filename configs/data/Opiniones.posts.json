@@ -1,0 +1,20 @@
+[{
+  "_id": {
+    "$oid": "67bc12521c4f3f49be0a16d0"
+  },
+  "title": "Barcelona lider",
+  "category": {
+    "$oid": "67bc0d2cfa11e3d20a84110d"
+  },
+  "content": "Una dura victoria del equipo cataluña :D",
+  "keeper": {
+    "$oid": "67bc11001c4f3f49be0a16c8"
+  },
+  "status": true,
+  "createdAt": {
+    "$date": "2025-02-24T06:31:46.748Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-24T06:33:31.812Z"
+  }
+}]

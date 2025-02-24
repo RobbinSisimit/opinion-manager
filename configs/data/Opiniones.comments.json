@@ -1,0 +1,19 @@
+[{
+  "_id": {
+    "$oid": "67bc13651c4f3f49be0a16e2"
+  },
+  "content": "que emocion",
+  "keeperUser": {
+    "$oid": "67bc11001c4f3f49be0a16c8"
+  },
+  "keeperPost": {
+    "$oid": "67bc12521c4f3f49be0a16d0"
+  },
+  "status": true,
+  "createdAt": {
+    "$date": "2025-02-24T06:36:21.486Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-24T06:36:21.486Z"
+  }
+}]
