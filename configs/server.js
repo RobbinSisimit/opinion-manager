@@ -12,9 +12,7 @@ import postRoutes from "../src/posts/post.routes.js"
 import commentRoutes from "../src/comment/comment.routes.js"
 import categoryRoutes from "../src/categories/category.routes.js"
 
-import bcrypt from "bcrypt";
 import Usuario from "../src/users/user.model.js";
-import Category from "../src/categories/category.model.js";
 import { hash } from "argon2";
 
 
@@ -39,37 +37,22 @@ const conectarDB = async () => {
     try {
         await dbConnection();
         console.log("Conexion Exitosa Con La Base De Datos");
-        await inicializarCategoria();
     } catch (error) {
         console.log("Error Al Conectar Con La Base De Datos", error);
     }
 }
 
-const inicializarCategoria = async () => {
-    try {
-        const defaultCategory = await Category.findOne({ name: "General" });
-        if (!defaultCategory) {
-            await Category.create({ name: "General" });
-            console.log("Categoría por defecto creada: General");
-        } else {
-            console.log("Categoría por defecto ya existente");
-        }
-    } catch (error) {
-        console.error("Error al inicializar categorías:", error);
-    }
-};
 
 
 const crearAdmin = async () => {
     try {
-        const adminExistente = await Usuario.findOne({ role: "ADMIN_ROLE" });
+        const adminastradorExistente = await Usuario.findOne({ role: "ADMIN_ROLE" });
 
-        if (!adminExistente) {
+        if (!adminastradorExistente) {
             const passwordEncriptada = await hash("Admin123");
 
             const admin = new Usuario({
                 name: "Admin",
-                surname: "Principal",
                 username: "admin",
                 email: "admin@gmail.com",
                 phone: "123456789",
@@ -78,9 +61,9 @@ const crearAdmin = async () => {
             });
 
             await admin.save();
-            console.log("Administrador creado exitosamente.");
+            console.log("Administrador creado exitosamente.:p");
         } else {
-            console.log("El administrador ya existe.");
+            console.log("El administrador ya existe.:P");
         }
     } catch (error) {
         console.error("Error al crear el administrador:", error);

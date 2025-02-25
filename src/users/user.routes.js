@@ -11,7 +11,7 @@ const router = Router();
 router.get("/", getUsers);
 
 router.get(
-    "/findUser/:id",
+    "/BuscarID/:id",
     [
         check("id", "No es un ID Valido").isMongoId(),
         check("id").custom(existeUsuarioById),

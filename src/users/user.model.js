@@ -5,22 +5,18 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: [true, "El Nombre Es Obligatorio"]
     },
-    surname: {
-        type: String,
-        required: [true, "El Apellido Es Obligatorio"]
-    },
     username: {
         type: String,
-        required: [true, "El Nombre De Usuario Es Obligatorio"]
+        required: [true, "El nombre de usuario es obligatorio"]
     },
     email:{
         type: String,
-        required: [true, "El Correo Es Obligatorio"],
+        required: [true, "El correo es obligatorio :D"],
         unique: true
     },
     password: {
         type: String,
-        required: [true, "La Contraseña Es Obligatoria"]
+        required: [true, "La contraseña es obligatorio :D"]
     },
     role: {
         type: String,
