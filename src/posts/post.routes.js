@@ -21,7 +21,7 @@ router.post(
 router.get("/", getPosts)
 
 router.get(
-    "/findPost/:id",
+    "/buscarPost/:id",
     [
         validarJWT,
         check("id", "No Es Un ID Valido").isMongoId(),

@@ -2,7 +2,7 @@ import User from "../users/user.model.js";
 import Post from "../posts/post.model.js";
 import Comment from "../comment/comment.model.js";
 
-export const saveComment = async (req, res) => {
+export const GuardarComentario = async (req, res) => {
     try {
         const data = req.body;
         const user = await User.findById(req.usuario._id); 
@@ -11,14 +11,14 @@ export const saveComment = async (req, res) => {
         if (!user) {
             return res.status(400).json({
                 success: false,
-                message: "Usuario No Encontrado"
+                message: "Usuario No Encontrado ;("
             });
         }
 
         if (!post) {
             return res.status(400).json({
                 success: false,
-                message: "Publicacion No Encontrada"
+                message: "Publicacion No Encontrada :("
             });
         }
 
@@ -33,20 +33,20 @@ export const saveComment = async (req, res) => {
 
         res.status(200).json({
             success: true,
-            message: "Comentario Creado",
+            message: "felicidades se Creado Comentario :)",
             comment
         });
     } catch (error) {
         console.error(error);
         res.status(500).json({
             success: false,
-            message: "Error al guardar el comentario",
+            message: "Error al guardar el comentario (pipipi)",
             error
         });
     }
 }
 
-export const getComments = async(req, res) => {
+export const listarComentarios = async(req, res) => {
     const {limite = 10, desde = 0} = req.query;
     const query = {status: true};
     try {
@@ -54,7 +54,7 @@ export const getComments = async(req, res) => {
             .skip(Number(desde))
             .limit(Number(limite));
             
-        const commentsWithOwnerNames =  await Promise.all(comments.map(async (comment) =>{
+        const nombreComentario =  await Promise.all(comments.map(async (comment) =>{
             const owner = await User.findById(comment.keeperUser);
             const post = await Post.findById(comment.keeperPost)
             return{
@@ -69,7 +69,7 @@ export const getComments = async(req, res) => {
         res.status(200).json({
             success: true,
             total,
-            comments: commentsWithOwnerNames
+            comments: nombreComentario
         })
 
     } catch (error) {
@@ -81,7 +81,7 @@ export const getComments = async(req, res) => {
     }
 }
 
-export const searchComment = async (req, res) =>{
+export const BuscarComentar = async (req, res) =>{
     const {id} = req.params;
 
     try {
@@ -90,7 +90,7 @@ export const searchComment = async (req, res) =>{
         if(!comment){
             return res.status(404).json({
                 success: false,
-                message: "Comentario No Encontrado"
+                message: "Comentario No Encontrado :("
             })
         }
 
@@ -112,7 +112,7 @@ export const searchComment = async (req, res) =>{
     }
 }
 
-export const deleteComment = async(req, res) => {
+export const eliminarComent = async(req, res) => {
     const {id} = req.params;
     try {
 
@@ -146,7 +146,7 @@ export const deleteComment = async(req, res) => {
 
 }
 
-export const updateComment = async (req, res) => {
+export const actualizarComent = async (req, res) => {
     try {
         const { id } = req.params;
         const { _id, keeper, ...data } = req.body; 

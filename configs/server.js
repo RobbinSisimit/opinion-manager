@@ -10,7 +10,7 @@ import authRoutes from '../src/auth/auth.routes.js'
 import userRoutes from "../src/users/user.routes.js"
 import postRoutes from "../src/posts/post.routes.js"
 import commentRoutes from "../src/comment/comment.routes.js"
-import categoryRoutes from "../src/categories/category.routes.js"
+import categoriaRoutes from "../src/categories/category.routes.js"
 
 import bcrypt from "bcrypt";
 import Usuario from "../src/users/user.model.js";
@@ -32,13 +32,13 @@ const configurarRutas = (app) =>{
     app.use("/Opiniones/v1/users", userRoutes);
     app.use("/Opiniones/v1/posts", postRoutes);
     app.use("/Opiniones/v1/comments", commentRoutes);
-    app.use("/Opiniones/v1/categorias", categoryRoutes);
+    app.use("/Opiniones/v1/categorias", categoriaRoutes);
 }
 
 const conectarDB = async () => {
     try {
         await dbConnection();
-        console.log("Conexion Exitosa Con La Base De Datos");
+        console.log("Conexion Exitosa Con La Base De Datos :p");
         await inicializarCategoria();
     } catch (error) {
         console.log("Error Al Conectar Con La Base De Datos", error);
@@ -69,7 +69,6 @@ const crearAdmin = async () => {
 
             const admin = new Usuario({
                 name: "Admin",
-                surname: "Principal",
                 username: "admin",
                 email: "admin@gmail.com",
                 phone: "123456789",
@@ -78,12 +77,12 @@ const crearAdmin = async () => {
             });
 
             await admin.save();
-            console.log("Administrador creado exitosamente.");
+            console.log("Administrador creado exitosamente :p");
         } else {
-            console.log("El administrador ya existe.");
+            console.log("El administrador ya existe.:p");
         }
     } catch (error) {
-        console.error("Error al crear el administrador:", error);
+        console.error("Error al crear el administrador :(", error);
     }
 };
 

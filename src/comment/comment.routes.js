@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { check } from "express-validator";
-import {saveComment, getComments, searchComment, deleteComment, updateComment} from "./comment.controller.js";
+import {GuardarComentario, listarComentarios, BuscarComentar, eliminarComent, actualizarComent} from "./comment.controller.js";
 import {validarCampos} from "../middlewares/validar-campos.js";
 import {validarJWT} from "../middlewares/validar-jwt.js";
 
@@ -14,19 +14,19 @@ router.post(
         check("content", "El contenido es obligatorio").not().isEmpty(),
         validarCampos
     ],
-    saveComment
+    GuardarComentario
 )
 
-router.get("/", getComments)
+router.get("/", listarComentarios)
 
 router.get(
-    "/findComment/:id",
+    "/BuscarComments/:id",
     [
         validarJWT,
         check("id", "No Es Un ID Valido").isMongoId(),
         validarCampos
     ],
-    searchComment
+    BuscarComentar
 )
 
 router.put(
@@ -36,7 +36,7 @@ router.put(
         check("id", "No Es Un ID Valido").isMongoId(),
         validarCampos
     ],
-    updateComment
+    actualizarComent
 )
 
 
@@ -47,7 +47,7 @@ router.delete(
         check("id", "No Es Un ID Valido").isMongoId(),
         validarCampos
     ],
-    deleteComment
+    eliminarComent
 )
 
 export default router;

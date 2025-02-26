@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createCategory, getCategories, updateCategory, deleteCategory } from "../categories/category.controller.js";
+import { crearCategoria, listarCategoria, ActualizarCategoria, EliminarCategoria } from "../categories/category.controller.js";
 import { validarJWT } from "../middlewares/validar-jwt.js";
 import { validarRol } from "../middlewares/validar-roles.js";
 
@@ -11,10 +11,10 @@ router.post(
     validarJWT,
     validarRol("ADMIN_ROLE")
     ],
-    createCategory
+    crearCategoria
 );
 
-router.get("/", getCategories);
+router.get("/", listarCategoria);
 
 router.put(
     "/:id",
@@ -22,7 +22,7 @@ router.put(
         validarJWT,
         validarRol("ADMIN_ROLE")
     ],
-    updateCategory
+    ActualizarCategoria
 );
 
 router.delete(
@@ -31,7 +31,7 @@ router.delete(
         validarJWT,
         validarRol("ADMIN_ROLE")
     ],
-    deleteCategory
+    EliminarCategoria
     );
 
 export default router;

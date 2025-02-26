@@ -1,7 +1,7 @@
 import Category from "../categories/category.model.js"
 import Post from "../posts/post.model.js"
 
-export const createCategory = async (req, res) => {
+export const crearCategoria = async (req, res) => {
     try {
         const { name } = req.body;
         const category = new Category({ name });
@@ -9,19 +9,19 @@ export const createCategory = async (req, res) => {
 
         res.status(201).json({
             success: true,
-            message: "Categoría creada",
+            message: "Categoría creada :)",
             category
         });
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error al crear la categoría",
+            message: "Error al crear la categoría :(",
             error
         });
     }
 };
 
-export const getCategories = async (req, res) => {
+export const listarCategoria = async (req, res) => {
     try {
         const categories = await Category.find({ status: true });
         res.status(200).json({
@@ -31,13 +31,13 @@ export const getCategories = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error al obtener categorías",
+            message: "Error al obtener categorías :(",
             error
         });
     }
 };
 
-export const updateCategory = async (req, res) => {
+export const ActualizarCategoria = async (req, res) => {
     try {
         const { id } = req.params;
         const { name } = req.body;
@@ -46,19 +46,19 @@ export const updateCategory = async (req, res) => {
 
         res.status(200).json({
             success: true,
-            message: "Categoría actualizada",
+            message: "Categoría actualizada :)",
             category
         });
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error al actualizar la categoría",
+            message: "Error al actualizar la categoría :|",
             error
         });
     }
 };
 
-export const deleteCategory = async (req, res) => {
+export const EliminarCategoria = async (req, res) => {
     try {
         const { id } = req.params;
 
@@ -66,7 +66,7 @@ export const deleteCategory = async (req, res) => {
         if (!defaultCategory) {
             return res.status(500).json({
                 success: false,
-                message: "No se encontró la categoría por defecto"
+                message: "No se encontró la categoría por defecto :("
             });
         }
 
@@ -76,12 +76,12 @@ export const deleteCategory = async (req, res) => {
 
         res.status(200).json({
             success: true,
-            message: "Categoría eliminada y publicaciones reasignadas"
+            message: "Categoría eliminada y publicaciones reasignadas :("
         });
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error al eliminar la categoría",
+            message: "Error al eliminar la categoría :(",
             error: error.message 
         });
     }

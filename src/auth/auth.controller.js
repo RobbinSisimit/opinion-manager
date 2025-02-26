@@ -60,7 +60,6 @@ export const register  = async (req, res) => {
 
         const user = await Usuario.create({
             name: data.name,
-            surname: data.surname,
             username: data.username,
             email: data.email,
             phone: data.phone,
@@ -69,7 +68,7 @@ export const register  = async (req, res) => {
         })
 
         return res.status(201).json({
-            message: "User Register Successfully",
+            message: "El usuario se registró exitosamente :D",
             userDetails:{
                 user: user.email
             }
@@ -79,7 +78,7 @@ export const register  = async (req, res) => {
         console.log(error);
 
         return res.status(500).json({
-            message: "User Registration Failed",
+            message: "Error en el registro de usuario >:(",
             error: error.message
         })
     }

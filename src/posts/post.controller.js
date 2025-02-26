@@ -10,7 +10,7 @@ export const savePost = async (req, res) => {
         if (!user) {
             return res.status(400).json({
                 success: false,
-                message: "Usuario No Encontrado"
+                message: "Usuario No Encontrado :("
             });
         }
 
@@ -18,7 +18,7 @@ export const savePost = async (req, res) => {
         if (!categoryExists) {
             return res.status(400).json({
                 success: false,
-                message: "Categoría no válida"
+                message: "Categoría no válida bobo"
             });
         }
 
@@ -34,14 +34,14 @@ export const savePost = async (req, res) => {
 
         res.status(200).json({
             success: true,
-            message: "Publicación Creada",
+            message: "Publicación Creada (happy)",
             post
         });
     } catch (error) {
         console.error(error);
         res.status(500).json({
             success: false,
-            message: "Error al guardar la Publicación",
+            message: "Error al guardar la Publicación :(",
             error
         });
     }
@@ -173,7 +173,7 @@ export const updatePost = async (req, res) => {
             if (!categoryExists) {
                 return res.status(400).json({
                     success: false,
-                    message: "Categoría no válida"
+                    message: "Categoría no válida :("
                 });
             }
             post.category = category;
@@ -184,7 +184,7 @@ export const updatePost = async (req, res) => {
 
         res.status(200).json({
             success: true,
-            msg: "Publicación Actualizada!",
+            msg: "Publicación Actualizada :)",
             post
         });
 
@@ -192,7 +192,7 @@ export const updatePost = async (req, res) => {
         console.error(error);
         res.status(500).json({
             success: false,
-            msg: "Error al actualizar la publicación",
+            msg: "Error al actualizar la publicación  :(",
             error
         });
     }
